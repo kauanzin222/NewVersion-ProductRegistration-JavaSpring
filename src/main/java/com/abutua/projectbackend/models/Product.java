@@ -1,5 +1,7 @@
 package com.abutua.projectbackend.models;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,8 +10,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="TBL_PRODUCT") 
-public class Product {
+@Table(name = "TBL_PRODUCT")
+public class Product implements Serializable {
 
     // Atributos:
     @Id
@@ -20,7 +22,7 @@ public class Product {
     private String description;
     private boolean promotion;
     private boolean newProduct;
-    
+
     @ManyToOne
     private Category category;
 
@@ -32,7 +34,8 @@ public class Product {
         this.category = category;
     }
 
-    public Product(){}
+    public Product() {
+    }
 
     // Métodos Construtores
     public Product(Long id, String name, String desc, Category category, boolean prom, boolean newProd, Double price) {
@@ -95,4 +98,67 @@ public class Product {
     public void setNewProduct(boolean newProduct) {
         this.newProduct = newProduct;
     }
-}
+
+    // Boas Práticas
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((price == null) ? 0 : price.hashCode());
+        result = prime * result + ((description == null) ? 0 : description.hashCode());
+        result = prime * result + (promotion ? 1231 : 1237);
+        result = prime * result + (newProduct ? 1231 : 1237);
+        result = prime * result + ((category == null) ? 0 : category.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Product other = (Product) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (price == null) {
+            if (other.price != null)
+                return false;
+        } else if (!price.equals(other.price))
+            return false;
+        if (description == null) {
+            if (other.description != null)
+                return false;
+        } else if (!description.equals(other.description))
+            return false;
+        if (promotion != other.promotion)
+            return false;
+        if (newProduct != other.newProduct)
+            return false;
+        if (category == null) {
+            if (other.category != null)
+                return false;
+        } else if (!category.equals(other.category))
+            return false;
+        return true;
+    }
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", description=" + description
+				+ ", promotion=" + promotion + ", newProduct=" + newProduct + "]";
+	}
+    
+}   
