@@ -18,9 +18,9 @@ public class ProductService {
     @Autowired
     public CategoryService categoryService;
 
-    public Product getById(int id) {
+    public Product getById(Long id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product NOT FOUND"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product Not Found"));
         return product;
     }
 
@@ -28,11 +28,11 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public void deleteById(int id) {
+    public void deleteById(Long id) {
         productRepository.delete(getById(id));
     }
 
-    public void update(int id, Product productUpdate) {
+    public void update(Long id, Product productUpdate) {
         Product product = getById(id);
 
         if (productUpdate.getCategory() == null) 

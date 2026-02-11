@@ -36,29 +36,29 @@ public class ProductController {
                                 .path("/{id}")
                                 .buildAndExpand(product.getId())
                                 .toUri();
-                
+
                 return ResponseEntity.created(location).body(product);
         }
 
         @GetMapping("{id}")
-        public ResponseEntity<Product> getProduct(@PathVariable int id) {
+        public ResponseEntity<Product> getProduct(@PathVariable long id) {
                 Product product = productService.getById(id);
                 return ResponseEntity.ok(product);
         }
 
         @GetMapping
-        public List<Product> getProducts() {
-                return productService.getAll();
+        public ResponseEntity<List<Product>> getProducts() {
+                return ResponseEntity.ok(productService.getAll());
         }
 
         @DeleteMapping("{id}")
-        public ResponseEntity<Void> removeProduct(@PathVariable int id) {
-                productService.deleteById(id);  
+        public ResponseEntity<Void> removeProduct(@PathVariable long id) {
+                productService.deleteById(id);
                 return ResponseEntity.noContent().build();
         }
 
         @PutMapping("{id}")
-        public ResponseEntity<Void> updateProduct(@PathVariable int id, @RequestBody Product productUpdate) {
+        public ResponseEntity<Void> updateProduct(@PathVariable long id, @RequestBody Product productUpdate) {
                 productService.update(id, productUpdate);
                 return ResponseEntity.ok().build();
         }

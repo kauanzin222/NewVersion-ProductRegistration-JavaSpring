@@ -7,14 +7,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="TBL_CATEGORY")
+@Table(name = "TBL_CATEGORY")
 public class Category {
 
     // Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    
+    private Integer id;
+
     private String name;
 
     // Construtor sem-args necessário ao JPA
@@ -22,7 +22,7 @@ public class Category {
     }
 
     // Método Construtor
-    public Category(int id, String name) {
+    public Category(Integer id, String name) {
         System.out.println("Construindo uma categoria!");
 
         this.id = id;
@@ -34,7 +34,7 @@ public class Category {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

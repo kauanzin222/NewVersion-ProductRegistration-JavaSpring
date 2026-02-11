@@ -18,13 +18,13 @@ public class CategoryService {
 
     public Category getByProduct(Product productUpdate) {
         Category category = categoryRepository.findById(productUpdate.getCategory().getId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category NOT FOUND"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category Not Found"));
         return category;
     }
 
     public Category getById(int id) {
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category NOT FOUND"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category Not Found"));
         return category;
     }
 

@@ -14,10 +14,9 @@ public class Product {
     // Atributos:
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    
+    private Long id;
     private String name;
-    private double price;
+    private Double price;
     private String description;
     private boolean promotion;
     private boolean newProduct;
@@ -35,16 +34,11 @@ public class Product {
 
     public Product(){}
 
-    private static int contProducts = 0;
-
     // Métodos Construtores
-    public Product(String name, String desc, Category category, boolean prom, boolean newProd, double price) {
+    public Product(Long id, String name, String desc, Category category, boolean prom, boolean newProd, Double price) {
         System.out.println("Construindo um Produto!");
 
-        // Aumentando a qtde de Produtos existentes
-        contProducts++;
-
-        this.id = contProducts;
+        this.id = id;
         this.name = name;
         this.description = desc;
         this.category = category;
@@ -54,11 +48,11 @@ public class Product {
     }
 
     // Métodos de Produto
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -74,7 +68,7 @@ public class Product {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
