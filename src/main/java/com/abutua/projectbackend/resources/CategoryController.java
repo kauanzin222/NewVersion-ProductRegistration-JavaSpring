@@ -17,27 +17,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @CrossOrigin
+@RequestMapping("categories")
 public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping("Categories/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<Category> getCategory(@PathVariable int id) {
         Category category = categoryService.getById(id);
         return ResponseEntity.ok(category);
     }
 
-    @GetMapping("Categories")
-    public List<Category> getCategories() {
-        return categoryService.getAll();
+    @GetMapping
+    public ResponseEntity<List<Category>> getCategories() {
+        return ResponseEntity.ok(categoryService.getAll()); 
     }
 
-    @PostMapping("Categories")
+    @PostMapping
     public ResponseEntity<Category> save(@RequestBody Category category) {
         category = categoryService.save(category);
 
@@ -50,13 +52,13 @@ public class CategoryController {
         return ResponseEntity.created(location).body(category);
     }
 
-    @PutMapping("Categories/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<Void> updateCategory(@PathVariable int id, @RequestBody Category categoryUpdate) {
         categoryService.update(id, categoryUpdate);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("Categories/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable int id) {
         categoryService.deleteById(id);
         return ResponseEntity.noContent().build();
