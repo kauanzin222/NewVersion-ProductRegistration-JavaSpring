@@ -2,6 +2,7 @@ package com.abutua.projectbackend.models;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,9 +18,14 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String name;
-    private Double price;
+
+    @Column(nullable = false, length = 1024)
     private String description;
+
+    private Double price;
     private boolean promotion;
     private boolean newProduct;
 
@@ -155,10 +161,10 @@ public class Product implements Serializable {
         return true;
     }
 
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", description=" + description
-				+ ", promotion=" + promotion + ", newProduct=" + newProduct + "]";
-	}
-    
-}   
+    @Override
+    public String toString() {
+        return "Product [id=" + id + ", name=" + name + ", price=" + price + ", description=" + description
+                + ", promotion=" + promotion + ", newProduct=" + newProduct + "]";
+    }
+
+}
