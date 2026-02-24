@@ -9,6 +9,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "TBL_PRODUCT")
@@ -19,13 +22,19 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 255)
+    @NotBlank(message = "Name can not be blank")
+    @Size(min = 3, max = 255, message = "Name lenght min = 3 and max = 255")
     private String name;
 
     @Column(nullable = false, length = 1024)
+    @NotBlank(message = "Description can not be blank")
+    @Size(min = 3, max = 1024, message = "Description lenght min = 3 and max = 1024")
     private String description;
 
+    @Min(value = 0, message = "Price min value = 0")
     private Double price;
+
     private boolean promotion;
     private boolean newProduct;
 
