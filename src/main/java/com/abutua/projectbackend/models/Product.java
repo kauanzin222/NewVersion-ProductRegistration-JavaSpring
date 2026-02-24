@@ -32,14 +32,7 @@ public class Product implements Serializable {
     @ManyToOne
     private Category category;
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
+    // Constructor JPA
     public Product() {
     }
 
@@ -57,6 +50,14 @@ public class Product implements Serializable {
     }
 
     // Métodos de Produto
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public Long getId() {
         return id;
     }

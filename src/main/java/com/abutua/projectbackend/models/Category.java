@@ -19,14 +19,12 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
 
-    // Construtor sem-args necessário ao JPA
+    // Constructor JPA
     public Category() {
     }
 
     // Método Construtor
     public Category(Integer id, String name) {
-        System.out.println("Construindo uma categoria!");
-
         this.id = id;
         this.name = name;
     }
