@@ -6,11 +6,14 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.abutua.projectbackend.dto.CategoryRequest;
+import com.abutua.projectbackend.dto.CategoryResponse;
 import com.abutua.projectbackend.models.Category;
 import com.abutua.projectbackend.services.CategoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,8 +43,8 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<Category> save(@RequestBody Category category) {
-        category = categoryService.save(category);
+    public ResponseEntity<CategoryResponse> save(@Validated @RequestBody CategoryRequest categoryRequest) {
+        CategoryResponse category = categoryService.save(categoryRequest);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
